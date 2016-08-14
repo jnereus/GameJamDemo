@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.5f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -65,8 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CollectionShowHide.cs" />
+    <Compile Include="Assets\Script\BackStart.cs" />
     <Compile Include="Assets\Script\BgRoll.cs" />
+    <Compile Include="Assets\Script\CollectionShowHide.cs" />
+    <Compile Include="Assets\Script\DataManager.cs" />
     <Compile Include="Assets\Script\GameKernel.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\IGameManager.cs" />
@@ -76,11 +76,14 @@
     <Compile Include="Assets\Script\ItemBase.cs" />
     <Compile Include="Assets\Script\ItemManager.cs" />
     <Compile Include="Assets\Script\MousePointGet.cs" />
+    <Compile Include="Assets\Script\PauseGame.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\ResourceManager.cs" />
+    <Compile Include="Assets\Script\ScrollRoll.cs" />
+    <Compile Include="Assets\Script\StartButton.cs" />
+    <Compile Include="Assets\Script\StartManager.cs" />
     <Compile Include="Assets\Script\TimeManager.cs" />
-    <Compile Include="Assets\ScrollRoll.cs" />
-    <Compile Include="Assets\StartButton.cs" />
+    <Compile Include="Assets\Script\TopUIScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

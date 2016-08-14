@@ -19,4 +19,5 @@ public class GameKernel : MonoBehaviour {
             IGameManagerList[i].Update();
         }
 	}
+    
 }

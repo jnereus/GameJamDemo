@@ -4,7 +4,10 @@ using System.Collections.Generic;
 public enum PlayerBuffType
 {
     Invincible,
-    Protect
+    Protect,
+    FlyAfterDead,
+    WindProtect,
+    ScoreAdd
 }
 
 public class PlayerBuff
@@ -25,19 +28,34 @@ public class Player : MonoBehaviour {
     public float MoveMent;
     public float PullSpeed;
     public Vector3 MousePosition;
-    
+
+    public GameObject Kite;
     public GameObject Wire;
+
     public float offset = 4;
 
-    public List<PlayerBuff> PlayerBuffList = new List<PlayerBuff>(); 
+    public List<PlayerBuff> PlayerBuffList = new List<PlayerBuff>();
+
+    public GameObject ProtectEffectShow;
+    public GameObject InvincibleEffectShow;
+    public GameObject FlyAfterDeadShow;
+    public GameObject WindProtectShow;
+    public GameObject TimeDelayShow;
+    public GameObject ScoreAddShow;
+
 
     public void Pull()
     {
+        Kite.GetComponent<Animator>().SetBool("Pull",true);
         Vector3 Pull =  transform.position - MousePosition;
-        Vector3 PullDir = Pull.normalized;
-        transform.position = Vector3.Lerp(transform.position, -PullDir * PullSpeed + transform.position,0.1f);
+        Vector3 PullDir = Pull.normalized*Time.deltaTime;
+        transform.position = Vector3.Lerp(transform.position, -PullDir * PullSpeed + transform.position,1f);
     }
 
+    public void Normal()
+    {
+        Kite.GetComponent<Animator>().SetBool("Pull", false);
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +66,7 @@ public class Player : MonoBehaviour {
 	void Update () {
         transform.Translate(new Vector3(0,flyUpSpeed*TimeManager.instance.PlayerDeltaTime,0));
         WireToMouse();
+        UpdateBuff();
     }
 
     void WireToMouse()
@@ -57,10 +76,9 @@ public class Player : MonoBehaviour {
         Vector3 direction = Wire.transform.position - MousePosition;
         Wire.transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI - 90, new Vector3(0, 0, 1));
     }
-
+    
     void UpdateBuff()
     {
-
         for(int i = 0; i < PlayerBuffList.Count; i++)
         {
             PlayerBuffList[i].BuffLifeTime = PlayerBuffList[i].BuffLifeTime - Time.deltaTime;
@@ -141,13 +159,16 @@ public class Player : MonoBehaviour {
             }
         }
 
-        if(c.tag == "DmgProtectItem")
+        if(c.tag == "Item")
         {
-            AddBuff(PlayerBuffType.Protect, 9999.0f);
-        }
-        if(c.tag == "InvincibleItem")
-        {
-            AddBuff(PlayerBuffType.Invincible, 5.0f);
+            ItemType ItemType = c.GetComponent<ItemBase>().ItemType;
+            if (ItemType == ItemType.ProtectItem) {
+                AddBuff(PlayerBuffType.Protect, 9999.0f);
+            }
+            if (ItemType == ItemType.invincibleItem)
+            {
+                AddBuff(PlayerBuffType.Invincible, 5.0f);
+            }
         }
     }
 }

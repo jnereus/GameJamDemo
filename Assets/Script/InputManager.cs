@@ -33,7 +33,9 @@ public class InputManager : IGameManager {
         {
             GameManager.instance.MainPlayer.GetComponent<Player>().Pull();
         }
+        if (Input.GetMouseButtonUp(0)){
+            GameManager.instance.MainPlayer.GetComponent<Player>().Normal();
+        }
     }
     
-
 }
